@@ -87,7 +87,7 @@ echo -e "-- Restarting Apache web server\n"
 sudo service apache2 restart
 
 # PHP ##########################################################################
-echo -e "-- Fetching PHP 5.6 repository\n"
+echo -e "-- Add PPA for PHP\n"
 add-apt-repository -y ppa:ondrej/php5-5.6 > /dev/null 2>&1
 
 echo -e "-- Updating packages list\n"
@@ -109,6 +109,11 @@ sed -i "s/error_reporting = .*/error_reporting = E_ALL/" ${PHP_INI}
 sed -i "s/display_errors = .*/display_errors = On/" ${PHP_INI}
 sed -i "s/post_max_size = .*/post_max_size = 64M/" ${PHP_INI}
 sed -i "s/upload_max_filesize = .*/upload_max_filesize = 64M/" ${PHP_INI}
+
+echo -e "-- Installing Composer\n"
+sudo apt-get install -y php5-cli curl > /dev/null
+curl -Ss https://getcomposer.org/installer | php > /dev/null
+sudo mv composer.phar /usr/bin/composer
 
 sudo service apache2 restart
 

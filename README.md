@@ -1,8 +1,18 @@
-### Description
+# vagrant-apache-php5-mysql
 
-Vagrant  box ubuntu/trusty64 + apache2  + php5.6 + mysql
+## Description
 
-### Install with Vagrant
+Vagrant box ubuntu/trusty64
+
+## Included Applications
+
+* Apache 2
+* PHP 5
+* MySQL
+* PhpMyAdmin
+* Composer
+
+## Vagrant
 
 Vagrant file: 
     
@@ -24,10 +34,10 @@ Access the box
 
     vagrant ssh
     
-#### Access webserver from host browser
+### Access web server from host browser
 
 You need to go to http://192.168.50.11/ in the browser.
 
-#### Access phpMyAdmin from host browser
+### Access phpMyAdmin from host browser
 
 You need to go to http://192.168.50.11/phpmyadmin in the browser. Credentials: root:root.
