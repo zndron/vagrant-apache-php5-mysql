@@ -11,6 +11,7 @@ Vagrant box ubuntu/trusty64
 * MySQL
 * PhpMyAdmin
 * Composer
+* Git
 
 ## Vagrant
 
@@ -21,6 +22,10 @@ Vagrant file:
 Vagrant config file: 
 
     bootstrap.sh
+   
+Destroy vagrant box
+
+   vagrant destroy 
    
 Run vagrant box
 
