@@ -14,3 +14,6 @@ nbproject
 
 # vagrant runtime
 /.vagrant
+
+index.php
+index.html

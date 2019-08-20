@@ -7,7 +7,7 @@ Vagrant box ubuntu/trusty64
 ## Included Applications
 
 * Apache 2
-* PHP 5
+* PHP 5.6
 * MySQL
 * PhpMyAdmin
 * Composer

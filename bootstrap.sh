@@ -21,6 +21,9 @@ MYSQL_PASSWORD=root
 # BOX ##########################################################################
 echo -e "-- Updating packages list\n"
 apt-get update -y -qq
+apt-get upgrade -qq
+apt-get install -y python-software-properties build-essential vim curl git
+apt-get autoremove -y -qq
 
 # APACHE #######################################################################
 echo -e "-- Installing Apache web server\n"
@@ -88,17 +91,16 @@ sudo service apache2 restart
 
 # PHP ##########################################################################
 echo -e "-- Add PPA for PHP\n"
-add-apt-repository -y ppa:ondrej/php5-5.6 > /dev/null 2>&1
+add-apt-repository -y ppa:ondrej/php > /dev/null 2>&1
 
 echo -e "-- Updating packages list\n"
 apt-get update -y -qq
 
-echo -e "-- Installing PHP modules\n"
-apt-get install -y python-software-properties > /dev/null 2>&1
-apt-get install -y libapache2-mod-php5 > /dev/null 2>&1
-apt-get install -y php5 > /dev/null 2>&1
-apt-get install -y php5-cli > /dev/null 2>&1
-apt-get install -y php5-mcrypt > /dev/null 2>&1
+echo -e "-- Installing PHP\n"
+apt-get install -y libapache2-mod-php5.6 > /dev/null 2>&1
+apt-get install -y php5.6 > /dev/null 2>&1
+apt-get install -y php5.6-cli > /dev/null 2>&1
+apt-get install -y php5.6-mcrypt > /dev/null 2>&1
 
 echo -e "-- Enabling PHP mcrypt module\n"
 php5enmod mcrypt
@@ -110,26 +112,25 @@ sed -i "s/display_errors = .*/display_errors = On/" ${PHP_INI}
 sed -i "s/post_max_size = .*/post_max_size = 64M/" ${PHP_INI}
 sed -i "s/upload_max_filesize = .*/upload_max_filesize = 64M/" ${PHP_INI}
 
-echo -e "-- Installing Composer\n"
-sudo apt-get install -y php5-cli curl > /dev/null
-curl -Ss https://getcomposer.org/installer | php > /dev/null
-sudo mv composer.phar /usr/bin/composer
-
 sudo service apache2 restart
 
+echo -e "-- Installing Composer\n"
+curl -Ss https://getcomposer.org/installer | php > /dev/null
+mv composer.phar /usr/bin/composer
+
 # TEST #########################################################################
-#echo -e "-- Creating a dummy index.html file\n"
-#cat > ${DOCUMENT_ROOT}/index.html <<EOD
-#<html>
-#<head>
-#<title>${HOSTNAME}</title>
-#</head>
-#<body>
-#<h1>${HOSTNAME}</h1>
-#<p>This is the landing page for <b>${HOSTNAME}</b>.</p>
-#</body>
-#</html>
-#EOD
+echo -e "-- Creating a dummy index.html file\n"
+cat > ${DOCUMENT_ROOT}/index.html <<EOD
+<html>
+<head>
+<title>${HOSTNAME}</title>
+</head>
+<body>
+<h1>${HOSTNAME}</h1>
+<p>This is the landing page for <b>${HOSTNAME}</b>.</p>
+</body>
+</html>
+EOD
 
 echo -e "-- Creating a dummy index.php file\n"
 cat > ${DOCUMENT_ROOT}/index.php <<EOD
